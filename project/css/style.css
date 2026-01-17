@@ -1,0 +1,434 @@
+/* ここから下に記載していく */
+/* =============================== */
+/* #main-header (ヘッダー全体) のスタイル */
+/* =============================== */
+#main-header {
+    background-color: white;
+    font-size: 21px;
+    padding: 50px;
+    max-width: 1200px;
+    border: 1px;
+    border-color: black;
+    margin: 10px 1200px;
+    
+    /* ロゴとメニューを横並びにするためにFlexboxを適用 */
+    display: flex;
+    justify-content: space-between; /* ロゴとメニューを左右に離す */
+    align-items: center; 
+    margin: 10px auto;
+    /* 垂直方向の中央揃え */
+}
+/* =============================== */
+/* #main-header ul (メニューのリスト) のスタイル */
+/* =============================== */
+#main-header ul {
+    list-style-type: none; /* ★★★ これで黒丸が消えます ★★★ */
+    padding-left: 0;      /* 左の余白を削除 */
+    margin: 0;            /* 上下のマージンを削除 */
+    display: flex;        /* li要素（メニュー項目）を横並びにする */
+}
+/* =============================== */
+/* #main-header li (メニュー項目) のスタイル */
+/* =============================== */
+#main-header li {
+    margin-left: 30px; /* メニュー項目間の間隔を調整 */
+}
+#main-header a {
+    text-decoration: none; /* ★★★ これで下線（傍線）が消えます ★★★ */
+    color: inherit;        /* 必要に応じて、文字の色を親要素から継承させる（または好きな色を指定） */
+}
+/* 1. 親要素: 配置の基準とコンテンツの配置 */
+.hero {
+    position: relative; /* 子要素のabsoluteの基準にする */
+    overflow: hidden; /* 子要素がはみ出た場合に備えて非表示にする */
+    text-align: center;
+    /* height: 500px; */ 
+}
+/* 2. 画像: 中央揃えと幅の設定 */
+.hero img {
+    width: 1200px;     
+    height: auto; 
+    display: block; /* ブロック要素化 */
+    margin: 0 auto; /* ブロック要素を中央揃えにする */
+}
+/* 3. 重ねたい文字（ul要素）: 絶対位置での配置と共通スタイル */
+.hero ul {
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    font-weight: bold; /* もしくは 700 など */
+    font-family: Hiragino Kaku Gothic ProN;
+    
+    /* 【解決策】文字を写真の上に重ねるためのz-index */
+    z-index: 10;
+    
+    /* その他の文字の共通スタイル */
+    margin: 0;
+    padding: 20px;
+    list-style: none;
+    text-align: center;
+    color: #ffffff;
+    
+    /* 1行目のスタイルとして機能 */
+    font-size: 36px;     
+    line-height: 1.5;
+}
+/* 4. 2行目のテキストだけを大きくする */
+.hero ul li:nth-child(2) {
+    font-size: 24px;     
+    line-height: 1.2;    
+    margin-top: 15px;    
+}
+.about{
+    font-size: 16px;
+    position: relative; /* 子要素のabsoluteの基準にする */
+    overflow: hidden; /* 子要素がはみ出た場合に備えて非表示にする */
+    text-align: center;
+    background-color: white;
+    color:black;
+    
+}
+.highlight{
+    padding-top: 60px;
+    display: block;
+    font-size: 24px;
+    color: #ffd61a;
+    padding-top: 60px;
+    padding-bottom: 30px;
+}
+.about h2{
+    display: block;
+    font-size: 18px;
+    padding-top:30px;
+    padding-bottom:60px;
+}
+.about p{
+    display: block;
+    margin-bottom: 40px;
+    line-height: 2.0;
+}
+.about p :last-child{
+    display: block;
+    margin-bottom: 80px;
+}
+.about-images {
+    display: flex;
+    justify-content: center; /* 中の画像を中央に寄せる */
+    gap: 0;               /* 画像同士の隙間 */
+    
+    /* 中央寄せの決定打 */
+    max-width: 1200px;       /* 最大幅 */
+    margin-left: auto;       /* 左の余白を自動調整 */
+    margin-right: auto;      /* 右の余白を自動調整 */
+    margin-top: 40px;        /* 上の文章との距離 */
+    margin-bottom: 80px;     /* 下のコンテンツとの距離 */
+    width: 95%;              /* スマホなどで端に余裕を持たせる */
+}
+.about-images img {
+    width: 25%;              /* 4枚なので1/4のサイズ */
+    max-width: 285px;        /* (1200px - 隙間) / 4 のおおよその値 */
+    height: auto;
+    object-fit: cover;
+}
+/* --- COURSE セクション共通 --- */
+.course {
+    padding-top: 60px;
+    padding: 80px 0;
+    background-color: #fff;
+}
+.course .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+/* タイトルとリード文 */
+.course-lead {
+    text-align: center;
+    line-height: 2.0;
+    margin-bottom: 80px;
+}
+/* --- コース項目設定（ネガティブマージンなし） --- */
+.item {
+    display: flex;
+    width: 100%;
+    /* 写真とテキストを上辺で揃える */
+    align-items: flex-start; 
+    margin-top: 0; /* ネガティブマージンを撤廃 */
+}
+/* 偶数番目は左右反転（仕様書通り） */
+.item:nth-child(even) {
+    flex-direction: row-reverse;
+}
+/* 写真：幅 720px / 高さをテキストと連動させる */
+.item-img {
+    width: 720px;
+    flex-shrink: 0;
+}
+.item-img img {
+    width: 100%;
+    /* 写真がテキスト1段分の高さと同じになるように調整 */
+    height: 400px; 
+    object-fit: cover;
+    display: block;
+}
+/* テキスト：幅 480px / 写真と同じ高さにする */
+.item-text {
+    width: 480px;
+    height: 400px; /* 写真の高さと合わせる */
+    flex-shrink: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 文字を中央に */
+    padding: 0 50px; /* 左右の余白（仕様書の50px） */
+    background-color: #fff;
+}
+/* 装飾 */
+.item-text h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 24px;
+}
+.item-text p {
+    font-size: 16px;
+    line-height: 1.8;
+}
+#news {
+    padding-top: 60px; /* Courseセクション（の最後）からの距離 [cite: 60, 62] */
+}
+/* --- 【重要】角を接させるための調整 --- */
+/* 2段目以降、写真の「位置」をテキスト1段分だけ調整すれば角が接します */
+/* しかし、もっとも確実なのは、各段をそのまま並べるデザインです。 */
+/* セクション全体の余白 */
+.section-title {
+    padding-top: 60px; /* 上の余白 */
+    padding-bottom: 5px; /* 下のサブタイトルとの距離を詰める */
+    text-align: center;
+    font-size: 24px;
+    color: #ffd61a;
+    font-weight: bold;
+}
+/* サブタイトル (ニュース) */
+.section-subtitle {
+    text-align: center;
+    font-size: 14px;      /* メインより小さく */
+    color: #333;         /* 日本語は読みやすく濃い色に */
+    margin-bottom: 40px; /* ニュース項目との間の余白 */
+    display: block;      /* 確実に1行占有させる */
+}
+/* ニュースを並べるコンテナ */
+.news-container {
+    display: flex;
+    justify-content: center; /* 中央に寄せる */
+    gap: 30px;               /* 項目同士の隙間（お好みで） */
+    max-width: 1200px;       /* 前のセクションと合わせると綺麗です */
+    margin: 0 auto;
+}
+/* 各ニュース項目（幅300px固定） */
+.news-item {
+    width: 300px;
+    text-align: left;        /* 文章は左揃えが見やすい */
+    cursor: pointer;      /* カーソルを指の形にする */
+    transition: all 0.3s; /* 動きをなめらかにする魔法の言葉 */
+}
+.news-item:hover {
+    transform: translateY(-5px); /* 上に5pxふわっと浮かす */}
+/* 画像の設定 */
+.news-item img {
+    width: 100%;             /* 300pxいっぱいに広げる */
+    height: 200px;           /* 高さを揃える */
+    object-fit: cover;       /* 画像が歪まないように調整 */
+    margin-bottom: 15px;
+}
+/* 日付のデザイン */
+.news-date {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 8px;
+}
+/* テキストのデザイン */
+.news-text {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+}
+/* ボタンを中央に配置するための外枠 */
+.news-button-container {
+    margin-top: 60px; /* NEWS欄から60px離す */
+    text-align: center; /* 中のボタンを中央寄せ */
+    margin-bottom: 80px; /* 次のセクションとの距離（任意） */
+}
+/* Moreボタン本体のデザイン */
+.more-btn {
+    display: inline-block; /* サイズを指定できるようにする */
+    width: 300px;
+    height: 60px;
+    line-height: 60px;    /* 縦方向の文字を中央にする（heightと同じ値） */
+    background-color: #ffd61a; /* チーズカラー */
+    color: #fff;          /* 文字を白に */
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none; /* 下線を消す */
+    border-radius: 4px;   /* 角を少し丸く */
+    transition: all 0.3s; /* ホバー時の動きを滑らかに */
+}
+/* ボタンのホバーアクション */
+.more-btn:hover {
+    background-color: #e6c016; /* 少し濃い黄色に */
+    box-shadow: 0 4px 15px rgba(255, 214, 26, 0.4); /* ふわっと光る影 */
+    transform: translateY(-2px); /* 少しだけ浮き上がらせる */
+}
+/* --- Access セクション全体 --- */
+.access {
+    background-color: #ffffff; /* 背景色：白 */
+    padding: 60px 0;
+    color: #222222; /* 文字色：黒（濃いグレー） */
+  }
+.access .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+/* タイトルスタイル */
+.access .section-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.access .section-subtitle {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 60px;
+}
+/* --- 地図の設定 --- */
+.access-map {
+    width: 100%;
+    margin-bottom: 60px;
+}
+.access-map iframe {
+    width: 100%;
+    vertical-align: bottom; /* 下部の微細な隙間を排除 */
+}
+/* --- 住所情報の設定（定義リスト形式） --- */
+.access-info {
+    max-width: 600px; /* 中央に寄せるための幅制限 */
+    margin: 0 auto;
+}
+.access-info dl {
+    display: flex;
+    flex-wrap: wrap;
+    line-height: 2.0;
+}
+.access-info dt {
+    width: 30%; /* 項目名の幅 */
+    font-weight: bold;
+    padding-bottom: 15px;
+}
+.access-info dd {
+    width: 70%; /* 内容の幅 */
+    padding-bottom: 15px;
+    margin-left: 0;
+}
+
+/* --- Contact全体 --- */
+.contact {
+    padding-top: 120px; /* News下部からの距離 [cite: 48, 71] */
+    padding-bottom: 60px;
+    background-color: #fff;
+}
+.contact-lead {
+    text-align: center;
+    margin-bottom: 60px;
+    line-height: 1.8;
+}
+.caution {
+    font-size: 14px;
+    color: #ff0000;
+    margin-top: 20px;
+}
+/* --- CONTACT フォームレイアウト修正 --- */
+.contact-form {
+    max-width: 640px; /* 240px + 400px */
+    margin: 0 auto;
+}
+.contact-form dl {
+    display: flex;
+    flex-wrap: wrap;
+    border-top: 1px solid #ddd;
+    margin: 0;
+}
+/* 質問項目 (左側 240px) */
+.contact-form dt {
+    width: 240px; 
+    padding: 20px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #ddd;
+    background-color: #f9f9f9;
+    font-weight: bold;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+/* 回答項目 (右側 400px) */
+.contact-form dd {
+    width: 400px;
+    padding: 20px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #ddd;
+    margin: 0;
+    background-color: #fff;
+}
+/* 入力要素のサイズ指定 (幅328px / 高さ36px / 枠線 #bfbfbf) */
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form select {
+    width: 328px;               /* 指定の幅 */
+    height: 36px;              /* 指定の高さ */
+    border: 1px solid #bfbfbf;  /* 指定の枠線色 */
+    padding: 0 10px;
+    box-sizing: border-box;
+    display: block;
+}
+/* 志望動機などのチェックボックス */
+.checkbox-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+/* 詳細（テキストエリア） */
+.contact-form textarea {
+    width: 328px;               /* 入力欄と幅を揃える */
+    height: 150px;              /* 適宜調整 */
+    border: 1px solid #bfbfbf;
+    padding: 10px;
+    box-sizing: border-box;
+}
+/* 送信ボタン */
+.form-btn {
+    text-align: center;
+    margin-top: 40px;
+}
+.btn-submit {
+    background-color: #ffcc00; /* 黄色のボタン */ 
+    color: #333;
+    padding: 15px 80px;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btn-submit:hover {
+    opacity: 0.8;
+}
+footer {
+    background-color: #707070; /* 仕様書の背景色指定  */
+    padding: 30px 0;           /* 上下の余白 */
+    text-align: center;        /* 文字を中央揃え [cite: 1] */
+}
+footer p {
+    color: #ffffff;            /* 背景色が濃いため文字は白 [cite: 1] */
+    font-size: 12px;           /* コピーライト用の小さめサイズ */
+    margin: 0;
+    letter-spacing: 0.05em;    /* 文字間隔を少し広げて読みやすく */
+}

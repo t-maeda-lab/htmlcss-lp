@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI時代のHTML/CSS学習ガイド</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f8fafc',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        .gradient-header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .step-number {
+            background: linear-gradient(135deg, #475569 0%, #334155 100%);
+        }
+        /* Prism.js theme override */
+        pre[class*="language-"] {
+            background: #1e293b !important;
+            border: 1px solid #334155 !important;
+            border-radius: 8px !important;
+            padding: 1rem !important;
+            margin: 1rem 0 !important;
+            overflow-x: auto !important;
+        }
+        code[class*="language-"] {
+            color: #e2e8f0 !important;
+            text-shadow: none !important;
+        }
+        /* Remove conflicting styles */
+        .token.comment,
+        .token.prolog,
+        .token.doctype,
+        .token.cdata {
+            color: #64748b !important;
+        }
+        .token.punctuation {
+            color: #94a3b8 !important;
+        }
+        .token.tag,
+        .token.attr-name,
+        .token.namespace,
+        .token.deleted {
+            color: #f87171 !important;
+        }
+        .token.attr-value,
+        .token.string,
+        .token.char,
+        .token.builtin,
+        .token.inserted {
+            color: #34d399 !important;
+        }
+        .token.property,
+        .token.number,
+        .token.boolean,
+        .token.constant,
+        .token.symbol {
+            color: #60a5fa !important;
+        }
+        .token.selector,
+        .token.important,
+        .token.atrule,
+        .token.keyword {
+            color: #a78bfa !important;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans antialiased">
+    <!-- Header -->
+    <header class="gradient-header text-white">
+        <div class="max-w-6xl mx-auto px-6 py-16">
+            <div class="text-center">
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-white/10 rounded-full mb-6">
+                    <i class="fas fa-robot text-2xl"></i>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">AI時代のLP課題学習ガイド</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-6 py-12">
+        
+        <!-- AI Era Approach -->
+        <section class="mb-16">
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center justify-center w-12 h-12 bg-slate-100 rounded-full mb-4">
+                    <i class="fas fa-lightbulb text-slate-600 text-xl"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">AI時代の開発アプローチ</h2>
+                <p class="text-slate-600 text-lg">現代では生成AIで一発でコードを生成できますが、学習目的では段階的なアプローチが重要です</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <!-- Bad Example -->
+                <div class="bg-red-50 border border-red-200 rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-times text-white text-sm"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-red-900">悪い例：一発生成</h3>
+                    </div>
+                    <div class="space-y-3 text-sm text-red-800">
+                        <div class="bg-red-100 p-3 rounded-lg">
+                            <p class="font-mono">"チーズアカデミーのサイトを完璧に作って"</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-arrow-down text-red-600"></i>
+                            <span>それっぽいものが生成される</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-arrow-down text-red-600"></i>
+                            <span>どこを修正すれば良いかわからない</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Good Example -->
+                <div class="bg-green-50 border border-green-200 rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-check text-white text-sm"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-green-900">良い例：段階的構築</h3>
+                    </div>
+                    <div class="space-y-3 text-sm text-green-800">
+                        <div class="space-y-2">
+                            <div class="flex items-center space-x-2">
+                                <span class="step-number w-5 h-5 bg-green-500 text-white rounded-full flex items-center justify-center text-xs">1</span>
+                                <span>大枠の設計（骨組み）</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="step-number w-5 h-5 bg-green-500 text-white rounded-full flex items-center justify-center text-xs">2</span>
+                                <span>各セクションの実装</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="step-number w-5 h-5 bg-green-500 text-white rounded-full flex items-center justify-center text-xs">3</span>
+                                <span>スタイリングの調整</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="step-number w-5 h-5 bg-green-500 text-white rounded-full flex items-center justify-center text-xs">4</span>
+                                <span>細部の修正</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Development Flow -->
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                <div class="bg-slate-800 text-white p-6">
+                    <div class="flex items-center">
+                        <i class="fas fa-cogs text-xl mr-3"></i>
+                        <h3 class="text-xl font-semibold">推奨開発フロー</h3>
+                    </div>
+                </div>
+                
+                <div class="p-6 space-y-8">
+                    <!-- Step 1 -->
+                    <div class="border-l-4 border-slate-400 pl-6">
+                        <div class="flex items-center mb-3">
+                            <span class="step-number w-8 h-8 text-white rounded-full flex items-center justify-center text-sm mr-3">1</span>
+                            <h4 class="text-lg font-semibold text-slate-900">設計・構造を決める</h4>
+                        </div>
+                        <p class="text-slate-600 mb-4">まず骨組みだけ作る</p>
+                        <pre><code class="language-html">&lt;!-- まず骨組みだけ作る --&gt;
+&lt;body&gt;
+    &lt;header&gt;&lt;!-- ヘッダー --&gt;&lt;/header&gt;
+    &lt;main&gt;
+        &lt;section class="hero"&gt;&lt;!-- メインビジュアル --&gt;&lt;/section&gt;
+        &lt;section class="about"&gt;&lt;!-- About --&gt;&lt;/section&gt;
+        &lt;section class="course"&gt;&lt;!-- Course --&gt;&lt;/section&gt;
+        &lt;section class="news"&gt;&lt;!-- News --&gt;&lt;/section&gt;
+        &lt;section class="access"&gt;&lt;!-- Access --&gt;&lt;/section&gt;
+        &lt;section class="contact"&gt;&lt;!-- Contact --&gt;&lt;/section&gt;
+    &lt;/main&gt;
+    &lt;footer&gt;&lt;!-- フッター --&gt;&lt;/footer&gt;
+&lt;/body&gt;</code></pre>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="border-l-4 border-slate-400 pl-6">
+                        <div class="flex items-center mb-3">
+                            <span class="step-number w-8 h-8 text-white rounded-full flex items-center justify-center text-sm mr-3">2</span>
+                            <h4 class="text-lg font-semibold text-slate-900">セクション毎に内容を実装</h4>
+                        </div>
+                        <p class="text-slate-600 mb-4">一つずつ中身を作っていく</p>
+                        <pre><code class="language-html">&lt;section class="hero"&gt;
+    &lt;div class="container"&gt;
+        &lt;h1&gt;セカイを変えるチーズを作ろう&lt;/h1&gt;
+        &lt;p&gt;チーズ職人養成学校「チーズアカデミーTOKYO」&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="border-l-4 border-slate-400 pl-6">
+                        <div class="flex items-center mb-3">
+                            <span class="step-number w-8 h-8 text-white rounded-full flex items-center justify-center text-sm mr-3">3</span>
+                            <h4 class="text-lg font-semibold text-slate-900">CSS でレイアウト実装</h4>
+                        </div>
+                        <p class="text-slate-600 mb-4">基本レイアウトから</p>
+                        <pre><code class="language-css">/* 基本レイアウトから */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* 横並びレイアウト */
+.course-grid {
+    display: flex;
+    gap: 20px;
+}</code></pre>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="border-l-4 border-slate-400 pl-6">
+                        <div class="flex items-center mb-3">
+                            <span class="step-number w-8 h-8 text-white rounded-full flex items-center justify-center text-sm mr-3">4</span>
+                            <h4 class="text-lg font-semibold text-slate-900">見た目の調整</h4>
+                        </div>
+                        <p class="text-slate-600 mb-4">最後に装飾</p>
+                        <pre><code class="language-css">/* 最後に装飾 */
+.hero {
+    background-image: url('img/mainvisual.jpg');
+    background-size: cover;
+    text-align: center;
+    padding: 100px 0;
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Problem Solving -->
+        <section class="mb-16">
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center justify-center w-12 h-12 bg-slate-100 rounded-full mb-4">
+                    <i class="fas fa-search text-slate-600 text-xl"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">問題解決のプロセス</h2>
+                <p class="text-slate-600 text-lg">「わからない」時の効果的な対処法</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="card-hover bg-white rounded-xl border border-slate-200 p-6">
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-play text-blue-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-slate-900 mb-3">1. まず出力してみる</h3>
+                        <ul class="text-sm text-slate-600 space-y-2">
+                            <li>とりあえず動くものを作る</li>
+                            <li>完璧でなくてOK</li>
+                            <li>エラーが出ても気にしない</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card-hover bg-white rounded-xl border border-slate-200 p-6">
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-eye text-green-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-slate-900 mb-3">2. 内容を確認する</h3>
+                        <ul class="text-sm text-slate-600 space-y-2">
+                            <li>ブラウザで表示を確認</li>
+                            <li>期待通りになっているか？</li>
+                            <li>どの部分がおかしいか特定</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card-hover bg-white rounded-xl border border-slate-200 p-6">
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-wrench text-purple-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-slate-900 mb-3">3. 問題を特定して修正</h3>
+                        <ul class="text-sm text-slate-600 space-y-2">
+                            <li>一つずつ問題を解決</li>
+                            <li>小さな変更を積み重ねる</li>
+                            <li>動作確認を繰り返す</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Dialog Examples -->
+            <div class="bg-white rounded-xl border border-slate-200 p-6">
+                <h3 class="text-xl font-semibold text-slate-900 mb-6 flex items-center">
+                    <i class="fas fa-comments text-slate-600 mr-3"></i>
+                    AIとの対話例
+                </h3>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-times text-red-500 mr-2"></i>
+                            <span class="font-semibold text-red-900">悪い質問</span>
+                        </div>
+                        <div class="bg-red-100 p-3 rounded text-sm text-red-800 font-mono">
+                            "サイトが動きません、直してください"
+                        </div>
+                    </div>
+
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span class="font-semibold text-green-900">良い質問</span>
+                        </div>
+                        <div class="bg-green-100 p-3 rounded text-sm text-green-800 font-mono">
+                            "flexboxで横並びにしたいのですが、<br>
+                            display: flex を指定しても縦に並んでしまいます。<br>
+                            以下のHTMLとCSSで何が問題でしょうか？<br><br>
+                            [具体的なコード]"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Understanding Checklist -->
+        <section class="mb-16">
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center justify-center w-12 h-12 bg-slate-100 rounded-full mb-4">
+                    <i class="fas fa-clipboard-check text-slate-600 text-xl"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">理解度チェックリスト</h2>
+                <p class="text-slate-600 text-lg">技術的な理解度を確認しましょう</p>
+            </div>
+
+            <!-- HTML Structure -->
+            <div class="bg-white rounded-xl border border-slate-200 mb-8">
+                <div class="bg-slate-800 text-white p-6">
+                    <div class="flex items-center">
+                        <i class="fas fa-code text-xl mr-3"></i>
+                        <h3 class="text-xl font-semibold">HTML構造の理解</h3>
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-slate-900 mb-4 flex items-center">
+                                <i class="fas fa-check-square text-slate-500 mr-2"></i>
+                                基本構造
+                            </h4>
+                            <div class="space-y-2 text-sm text-slate-600">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2">
+                                    HTMLの構造（開始タグ・終了タグ）を理解している
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2">
+                                    <code>&lt;head&gt;</code> と <code>&lt;body&gt;</code> の役割を理解している
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="font-semibold text-slate-900 mb-4 flex items-center">
+                                <i class="fas fa-sitemap text-slate-500 mr-2"></i>
+                                要素の関係性
+                            </h4>
+                            <div class="space-y-2 text-sm text-slate-600">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2">
+                                    idとclassの違いを理解している
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CSS Layout -->
+            <div class="bg-white rounded-xl border border-slate-200 mb-8">
+                <div class="bg-slate-800 text-white p-6">
+                    <div class="flex items-center">
+                        <i class="fas fa-layer-group text-xl mr-3"></i>
+                        <h3 class="text-xl font-semibold">CSSレイアウトの理解</h3>
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-star text-yellow-500 mr-2"></i>
+                            <span class="font-semibold text-yellow-900">重要度：★★★</span>
+                        </div>
+                        <p class="text-yellow-800 text-sm">
+                            <strong>質問：横並びがなぜ実現できているか説明できますか？</strong>
+                        </p>
+                    </div>
+
+                    <div class="space-y-2 text-sm text-slate-600 mb-6">
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-2">
+                            <code>display: flex</code> が何をしているか説明できる
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-2">
+                            <code>justify-content</code> の各値（center, space-between等）の効果を理解
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-2">
+                            <code>align-items</code> でのアライメント調整を理解
+                        </label>
+                    </div>
+
+                    <pre class="code-block"><code class="language-css">/* これらの効果を説明できるか？ */
+.container {
+    display: flex;              /* ←なぜこれで横並びになる？ */
+    justify-content: center;    /* ←これは何をしている？ */
+    align-items: center;        /* ←これの効果は？ */
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- External Services -->
+            <div class="bg-white rounded-xl border border-slate-200">
+                <div class="bg-slate-800 text-white p-6">
+                    <div class="flex items-center">
+                        <i class="fas fa-globe text-xl mr-3"></i>
+                        <h3 class="text-xl font-semibold">外部サービス連携</h3>
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-map-marker-alt text-blue-500 mr-2"></i>
+                            <span class="font-semibold text-blue-900">重要度：★★★</span>
+                        </div>
+                        <p class="text-blue-800 text-sm">
+                            <strong>質問：Googleの地図埋め込みがなぜ実現できているか説明できますか？</strong>
+                        </p>
+                    </div>
+
+                    <div class="space-y-2 text-sm text-slate-600 mb-6">
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-2">
+                            <code>&lt;iframe&gt;</code> タグの役割を理解している
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-2">
+                            Google Maps Embedの仕組みを理解
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-2">
+                            srcでの外部コンテンツ読み込みを理解
+                        </label>
+                    </div>
+
+                    <pre class="code-block"><code class="language-html">&lt;!-- これらの仕組みを説明できるか？ --&gt;
+&lt;iframe 
+    src="https://www.google.com/maps/embed?pb=..."
+    width="100%" 
+    height="400"
+    style="border:0;" 
+    allowfullscreen="" 
+    loading="lazy"&gt;
+&lt;/iframe&gt;</code></pre>
+
+                    <div class="bg-slate-50 rounded-lg p-4 mt-4">
+                        <h5 class="font-semibold text-slate-900 mb-2">理解ポイント：</h5>
+                        <div class="space-y-1 text-sm text-slate-600">
+                            <div>• なぜiframeが必要なのか？</div>
+                            <div>• セキュリティ面での注意点は？</div>
+                            <div>• レスポンシブにするにはどうする？</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Final Note -->
+        <div class="bg-white border border-slate-200 rounded-xl p-8 text-center">
+            <p class="text-slate-600 text-lg leading-relaxed max-w-2xl mx-auto">
+                完璧である必要はありません。<br>
+                <strong>プロセスと理解が大切です！</strong><br>
+                一歩ずつ、確実に学んでいきましょう。
+            </p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white mt-16 py-12">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <div class="flex items-center justify-center mb-4">
+                <i class="fas fa-graduation-cap text-2xl mr-3"></i>
+                <span class="text-xl font-semibold">AI時代の学習ガイド</span>
+            </div>
+            <p class="text-slate-400">現代的なHTML/CSS学習アプローチ</p>
+        </div>
+    </footer>
+
+    <script>
+        // Prism.js highlighting
+        Prism.highlightAll();
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Checkbox interactions
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const label = this.closest('label');
+                if (this.checked) {
+                    label.classList.add('line-through', 'text-slate-400');
+                } else {
+                    label.classList.remove('line-through', 'text-slate-400');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
